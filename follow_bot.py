@@ -48,7 +48,7 @@ for user in prepend:
         follow_button = driver.find_elements_by_xpath("//button[@aria-label='Follow this person']")
 
         # time.sleep(1)
-        print len(follow_button)
+        # print len(follow_button)
         try:
             for i in follow_button:
                 i.submit()
