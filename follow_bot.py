@@ -1,13 +1,11 @@
 from selenium import webdriver
 import time
 import sys
+
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-
-
-
-#Firefox used
+# Firefox used
 driver = webdriver.Firefox()
 # base url
 driver.get("http://github.com/login")
@@ -21,21 +19,21 @@ time.sleep(1)
 password.send_keys("password for github")
 time.sleep(1)
 
-
 login_form = driver.find_element_by_xpath("//input[@value='Sign in']")
 time.sleep(1)
 login_form.click()
 time.sleep(1)
 
+# These are some of the most popular users on github
 prepend = ["jashkenas", "ruanyf", "substack", "kennethreitz", "jlord", "daimajia", "mdo", "schacon", "mattt",
            "sindresorhus", "defunkt", "douglascrockford", "mbostock", "jeresig",
-"mojombo", "addyosmani", "paulirish", "vczh", "romannurik", "tenderlove", "chriscoyier", "johnpapa", "josevalim",
+           "mojombo", "addyosmani", "paulirish", "vczh", "romannurik", "tenderlove", "chriscoyier", "johnpapa",
+           "josevalim",
            "charliesome", "CoderMJLee", "ry", "antirez", "muan", "isaacs", "angusshire",
-"hadley", "hakimel", "yyx990803", "fat", "fabpot", "ibireme", "tekkub",
+           "hadley", "hakimel", "yyx990803", "fat", "fabpot", "ibireme", "tekkub",
            "BYVoid", "laruence", "onevcat", "tpope", "mrdoob", "LeaVerou", "chrisbanes", "wycats", "lifesinger",
-"cloudwu", "mitsuhiko", "michaelliao", "ryanb", "clowwindy", "JacksonTian", "yinwang0", "Trinea",
+           "cloudwu", "mitsuhiko", "michaelliao", "ryanb", "clowwindy", "JacksonTian", "yinwang0", "Trinea",
            "pjhyett", "dhh", "gaearon"]
-
 
 for user in prepend:
     for t in range(1, 100):
@@ -47,15 +45,12 @@ for user in prepend:
         # follow_button = driver.find_elements_by_xpath("//button[@type='submit']")
         follow_button = driver.find_elements_by_xpath("//button[@aria-label='Follow this person']")
 
-        # time.sleep(1)
-        # print len(follow_button)
+        # Once page is loaded this clicks all buttons for follow
         try:
             for i in follow_button:
                 i.submit()
         except:
             pass
         time.sleep(1)
-
-
 
 driver.close()
