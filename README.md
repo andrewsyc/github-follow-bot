@@ -8,7 +8,7 @@
 
 ### Requirements
 
-* Selenium Python Webdriver
+* Selenium Python Webdriver, if the latest Firefox version is on your computer or device, the Webdriver may not work. Sometimes this occurs with just 1 version number.
 
 ### Misc
 
