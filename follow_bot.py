@@ -33,11 +33,11 @@ prepend = ["jashkenas", "ruanyf", "substack", "kennethreitz", "jlord", "daimajia
            "hadley", "hakimel", "yyx990803", "fat", "fabpot", "ibireme", "tekkub",
            "BYVoid", "laruence", "onevcat", "tpope", "mrdoob", "LeaVerou", "chrisbanes", "wycats", "lifesinger",
            "cloudwu", "mitsuhiko", "michaelliao", "ryanb", "clowwindy", "JacksonTian", "yinwang0", "Trinea",
-           "pjhyett", "dhh", "gaearon"]
+           "pjhyett", "dhh", "gaearon","j-j-gajjar"]
 
 for user in prepend:
     for t in range(1, 100):
-        string = "https://github.com/{}/followers?page={}".format(user, t)
+        string = "https://github.com/{}?page={}&tab=followers".format(user, t)
         driver.get(string)
         time.sleep(1)
 
