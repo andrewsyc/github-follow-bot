@@ -1,11 +1,5 @@
 from selenium import webdriver
 import time
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
-
-
-
 
 #Firefox used
 driver = webdriver.Firefox()
@@ -29,31 +23,22 @@ time.sleep(1)
 
 prepend = ["your_username"]
 
-
 for user in prepend:
-    for i in range(0, 200):
-        for t in range(1, 100):
-            string = "https://github.com/{}/following?page={}".format(user, t)
-            driver.get(string)
-            time.sleep(1)
-
-            follow_button = driver.find_elements_by_xpath("//button[@aria-label='Unfollow this person']")
-
-            # time.sleep(1)
-            # print len(follow_button)
+    string = "https://github.com/{}?tab=followers".format(user)
+    driver.get(string)
+    while True:
+        time.sleep(1)
+        follow_buttons_div = driver.find_element_by_xpath(
+            "/html[1]/body[1]/div[4]/main[1]/div[2]/div[1]/div[2]/div[2]/div[1]")
+        for btn in follow_buttons_div.find_elements_by_css_selector("*"):
             try:
-                for i in follow_button:
-                    i.submit()
+                if "Unfollow" in btn.get_attribute("value"):
+                    btn.click()
             except:
                 pass
-            time.sleep(1)
-
-
-
-driver.close()
-
-time.sleep(3)
-
-time.sleep(3)
+        try:
+            driver.find_element_by_xpath("//a[normalize-space()='Next']").click()
+        except:
+            break
 
 driver.close()

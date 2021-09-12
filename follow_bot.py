@@ -1,9 +1,5 @@
 from selenium import webdriver
 import time
-import sys
-
-reload(sys)
-sys.setdefaultencoding('utf-8')
 
 # Firefox used
 driver = webdriver.Firefox()
@@ -36,21 +32,20 @@ prepend = ["jashkenas", "ruanyf", "substack", "kennethreitz", "jlord", "daimajia
            "pjhyett", "dhh", "gaearon"]
 
 for user in prepend:
-    for t in range(1, 100):
-        string = "https://github.com/{}/followers?page={}".format(user, t)
-        driver.get(string)
+    string = "https://github.com/{}?tab=followers".format(user)
+    driver.get(string)
+    while(True):
         time.sleep(1)
-
-        # make sure to pick the correct directory to save the files to
-        # follow_button = driver.find_elements_by_xpath("//button[@type='submit']")
-        follow_button = driver.find_elements_by_xpath("//button[@aria-label='Follow this person']")
-
-        # Once page is loaded this clicks all buttons for follow
+        follow_buttons_div = driver.find_element_by_xpath("/html[1]/body[1]/div[4]/main[1]/div[2]/div[1]/div[2]/div[2]/div[1]")
+        for btn in follow_buttons_div.find_elements_by_css_selector("*"):
+            try:
+                if "Follow" in btn.get_attribute("value"):
+                    btn.click()
+            except:
+                pass
         try:
-            for i in follow_button:
-                i.submit()
+            driver.find_element_by_xpath("//a[normalize-space()='Next']").click()
         except:
-            pass
-        time.sleep(1)
-
+            break
+        
 driver.close()
