@@ -1,7 +1,8 @@
 from selenium import webdriver
 import time
 import sys
-reload(sys)
+import importlib
+importlib.reload(sys)
 sys.setdefaultencoding('utf-8')
 
 

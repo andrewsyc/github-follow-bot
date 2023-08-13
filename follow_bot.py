@@ -1,8 +1,9 @@
 from selenium import webdriver
 import time
 import sys
+import importlib
 
-reload(sys)
+importlib.reload(sys)
 sys.setdefaultencoding('utf-8')
 
 # Firefox used
